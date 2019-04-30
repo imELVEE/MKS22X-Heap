@@ -1,18 +1,20 @@
 public class MyHeap{
   public static void pushDown(int[]data,int size,int index){
     int node = index+1;
-    if (node*2 <= size){
-      if (node*2+1 <= size){
-        if (data[node*2] > data[node*2-1]){
-          swap(data,index,node*2);
-          pushDown(data,size,node*2);
-        }
-        else{
-          swap(data,index,node*2-1);
-          pushDown(data,size,node*2-1);
+    if (node*2 < size){
+      if (node*2+1 < size){
+        if (data[index] < data[node*2] || data[index] < data[node*2-1]){
+          if (data[node*2] > data[node*2-1]){
+            swap(data,index,node*2);
+            pushDown(data,size,node*2);
+          }
+          else{
+            swap(data,index,node*2-1);
+            pushDown(data,size,node*2-1);
+          }
         }
       }
-      else{
+      else if (data[index] < data[node*2]){
         swap(data,index,node*2);
         pushDown(data,size,node*2);
       }
@@ -32,5 +34,12 @@ public class MyHeap{
     }
   }
 
+  public static void heapify(int[] data){
+    for (int i = 0 ; i < data.length ; i++){
+      pushUp(data,i);
+    }
+  }
+
   
+
 }
